@@ -68,13 +68,19 @@ predictor = dlib.shape_predictor("model/shape_predictor_68_face_landmarks.dat")
 
 
 cap = cv2.VideoCapture(0)
+t = dt.datetime.now()
 
 # loop over frames from the video stream
 while True:
 
 	ret,frame = cap.read()
 
-	t = dt.datetime.now()
+	delta = dt.datetime.now()-t
+	if delta.seconds >= 5:
+		print("5 S Crossed")
+		print(dt.datetime.now())
+		# Update 't' variable to new time
+		t = dt.datetime.now()
 
 	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -124,18 +130,10 @@ while True:
 
 		# draw the total number of blinks on the frame along with
 		# the computed eye aspect ratio for the frame
-		delta = dt.datetime.now()-t
-		if delta.seconds >= 5:
-			print("1 S")
-			print(dt.datetime.now())
-			# Update 't' variable to new time
-			t = dt.datetime.now()
-			cv2.putText(frame, "Blinks: {}".format(TOTAL), (10, 30),
-				cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-			COUNTER = 0
 
-		# cv2.putText(frame, "Blinks: {}".format(TOTAL), (10, 30),
-		# 	cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+
+		cv2.putText(frame, "Blinks: {}".format(TOTAL), (10, 30),
+			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 		cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30),
 			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 
