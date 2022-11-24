@@ -10,6 +10,7 @@ import time
 import dlib
 import cv2
 import os
+import datetime as dt
 
 
 def download_facelandmark_model():
@@ -72,6 +73,9 @@ cap = cv2.VideoCapture(0)
 while True:
 
 	ret,frame = cap.read()
+
+	t = dt.datetime.now()
+
 	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
 	# detect faces in the grayscale frame
@@ -120,8 +124,18 @@ while True:
 
 		# draw the total number of blinks on the frame along with
 		# the computed eye aspect ratio for the frame
-		cv2.putText(frame, "Blinks: {}".format(TOTAL), (10, 30),
-			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+		delta = dt.datetime.now()-t
+		if delta.seconds >= 5:
+			print("1 S")
+			print(dt.datetime.now())
+			# Update 't' variable to new time
+			t = dt.datetime.now()
+			cv2.putText(frame, "Blinks: {}".format(TOTAL), (10, 30),
+				cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+			COUNTER = 0
+
+		# cv2.putText(frame, "Blinks: {}".format(TOTAL), (10, 30),
+		# 	cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 		cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30),
 			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 
