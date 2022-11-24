@@ -71,14 +71,19 @@ cap = cv2.VideoCapture(0)
 t = dt.datetime.now()
 
 # loop over frames from the video stream
+MIN_WISE = {}
 while True:
 
 	ret,frame = cap.read()
 
 	delta = dt.datetime.now()-t
-	if delta.seconds >= 5:
-		print("5 S Crossed")
+	if delta.seconds >= 20:
+		print("20 S Crossed")
 		print(dt.datetime.now())
+		print(TOTAL)
+		x = str(dt.datetime.now())
+		MIN_WISE.update( {""+x : TOTAL} )
+		TOTAL = 0
 		# Update 't' variable to new time
 		t = dt.datetime.now()
 
@@ -143,6 +148,7 @@ while True:
 
 	# if the `q` key was pressed, break from the loop
 	if key == ord("q"):
+
 		break
 
 # do a bit of cleanup
