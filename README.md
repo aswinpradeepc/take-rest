@@ -11,3 +11,5 @@ CVS is a condition caused by prolonged use of digital devices, leading to eye st
 - Counts the number of blinks to monitor eye activity.
 - Notifies the user to take breaks when necessary.
 - Customizable blink count threshold and break intervals.
+
+In order to check this program, clone this repository and https://github.com/italojs/facial-landmarks-recognition/ download "shape_predictor_68_face_landmarks.dat" file and store it in a folder called "model/". Then run the main.py file
