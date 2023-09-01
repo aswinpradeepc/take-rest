@@ -2,6 +2,8 @@
 
 take-rest is a Python program that utilizes OpenCV to count the number of blinks by the user and encourages them to take regular breaks, reducing the risk of Computer Vision Syndrome (CVS).
 
+The code for counting number of blinks is taken from another opensource project on github.
+
 CVS is a condition caused by prolonged use of digital devices, leading to eye strain, dryness, and discomfort. This program aims to address this issue by reminding users to rest their eyes through blink monitoring.
 
 ## Features
